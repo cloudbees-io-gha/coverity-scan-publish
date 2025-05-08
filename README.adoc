@@ -85,7 +85,7 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Coverity scan
-        uses: cloudbees-io/coverity-github-test@main
+        uses: cloudbees-io-gha/coverity-scan-publish@v1
         with:
           api-token: ${{ secrets.COVERITY_API_TOKEN }}
           cloudbees-pat: ${{ secrets.CLOUDBEES_QA_PAT }}
