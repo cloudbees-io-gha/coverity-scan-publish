@@ -43,9 +43,10 @@ The following is a basic example of using this action:
 
 [source,yaml]
 ----
-      permissions:
-        id-token: write
-        contents: read
+    permissions:
+      id-token: write
+      contents: read
+    steps:
       - name: Scan with Coverity on Polaris
         uses: cloudbees-io-gha/coverity-scan-publish@v1
         with:
