@@ -22,11 +22,6 @@ Set up the CloudBees platform and GHA to work together, providing key features o
 | Yes
 | The Coverity on Polaris API token.
 
-| `cloudbees-pat`
-| String
-| Yes
-| The https://docs.cloudbees.com/docs/cloudbees-platform/latest/workflows/personal-access-token[CloudBees platform personal access token].
-
 | `server-url`
 | String
 | Yes
@@ -48,12 +43,14 @@ The following is a basic example of using this action:
 
 [source,yaml]
 ----
-
+    permissions:
+      id-token: write
+      contents: read
+    steps:
       - name: Scan with Coverity on Polaris
-        uses: cloudbees-io-gha/coverity-scan-publish@v1
+        uses: cloudbees-io-gha/coverity-scan-publish@v2
         with:
           api-token: ${{ secrets.COVERITY_POLARIS_TOKEN }}
-          cloudbees-pat : ${{ secrets.CloudBees-platform-PAT }}
           server-url: ${{ vars.COVERITY_POLARIS_SERVER_URL }}
 
 ----
@@ -80,15 +77,17 @@ on:
 jobs:
   coverity-codescan:
     runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+      contents: read
     steps:
       - name: Checkout repository code
         uses: actions/checkout@v3
 
       - name: Coverity scan
-        uses: cloudbees-io-gha/coverity-scan-publish@v1
+        uses: cloudbees-io-gha/coverity-scan-publish@v2
         with:
           api-token: ${{ secrets.COVERITY_API_TOKEN }}
-          cloudbees-pat: ${{ secrets.CLOUDBEES_QA_PAT }}
           server-url: ${{ vars.COVERITY_SERVER_URL }}
 
 
